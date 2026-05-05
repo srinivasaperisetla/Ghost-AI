@@ -26,34 +26,36 @@ export function ProjectSidebar({ isOpen, onClose }: ProjectSidebarProps) {
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
-      <div className="pointer-events-auto flex h-full flex-col rounded-2xl border border-border bg-background/95 p-4 shadow-xl backdrop-blur-xs">
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-sm font-semibold text-foreground">Projects</h2>
-          <Button aria-label="Close project sidebar" onClick={onClose} size="icon-xs" variant="ghost">
-            <X />
+      {isOpen ? (
+        <div className="pointer-events-auto flex h-full flex-col rounded-2xl border border-border bg-background/95 p-4 shadow-xl backdrop-blur-xs">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-sm font-semibold text-foreground">Projects</h2>
+            <Button aria-label="Close project sidebar" onClick={onClose} size="icon-xs" variant="ghost">
+              <X />
+            </Button>
+          </div>
+
+          <Tabs className="min-h-0 flex-1" defaultValue="my-projects">
+            <TabsList className="w-full">
+              <TabsTrigger value="my-projects">My Projects</TabsTrigger>
+              <TabsTrigger value="shared">Shared</TabsTrigger>
+            </TabsList>
+
+            <TabsContent className="mt-3 min-h-0 flex-1" value="my-projects">
+              <SidebarPlaceholder label="No projects yet. Create one to start designing." />
+            </TabsContent>
+
+            <TabsContent className="mt-3 min-h-0 flex-1" value="shared">
+              <SidebarPlaceholder label="No shared projects yet." />
+            </TabsContent>
+          </Tabs>
+
+          <Button className="mt-4 w-full" variant="outline">
+            <Plus />
+            New Project
           </Button>
         </div>
-
-        <Tabs className="min-h-0 flex-1" defaultValue="my-projects">
-          <TabsList className="w-full">
-            <TabsTrigger value="my-projects">My Projects</TabsTrigger>
-            <TabsTrigger value="shared">Shared</TabsTrigger>
-          </TabsList>
-
-          <TabsContent className="mt-3 min-h-0 flex-1" value="my-projects">
-            <SidebarPlaceholder label="No projects yet. Create one to start designing." />
-          </TabsContent>
-
-          <TabsContent className="mt-3 min-h-0 flex-1" value="shared">
-            <SidebarPlaceholder label="No shared projects yet." />
-          </TabsContent>
-        </Tabs>
-
-        <Button className="mt-4 w-full" variant="outline">
-          <Plus />
-          New Project
-        </Button>
-      </div>
+      ) : null}
     </aside>
   );
 }
